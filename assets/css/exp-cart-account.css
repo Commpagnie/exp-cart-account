@@ -61,19 +61,7 @@
    2. GLOBAL / SHARED STYLES
    ========================================================================== */
 
-.exp-styled-cart .entry-content,
-.exp-styled-checkout .entry-content,
-.exp-styled-account .entry-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px 60px;
-}
-
-.exp-styled-cart .page-header,
-.exp-styled-checkout .page-header,
-.exp-styled-account .page-header {
-    display: none;
-}
+/* Layout handled by Elementor containers — no entry-content overrides */
 
 /* ==========================================================================
    3. CART PAGE (WooCommerce Blocks)
@@ -1276,11 +1264,7 @@
 
 /* Mobile */
 @media (max-width: 768px) {
-    .exp-styled-cart .entry-content,
-    .exp-styled-checkout .entry-content,
-    .exp-styled-account .entry-content {
-        padding: 20px 12px 40px;
-    }
+    /* Layout handled by Elementor containers */
     
     /* Cart items card */
     .woocommerce-cart .wp-block-woocommerce-cart-items-block,
