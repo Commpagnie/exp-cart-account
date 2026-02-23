@@ -1219,12 +1219,12 @@
    ========================================================================== */
 
 /* All WooCommerce buttons on cart/account pages */
-.exp-styled-cart .woocommerce a.button,
-.exp-styled-cart .woocommerce button.button,
-.exp-styled-cart .woocommerce input.button,
-.exp-styled-account .woocommerce a.button,
-.exp-styled-account .woocommerce button.button,
-.exp-styled-account .woocommerce input.button {
+.woocommerce-cart .woocommerce a.button,
+.woocommerce-cart .woocommerce button.button,
+.woocommerce-cart .woocommerce input.button,
+.woocommerce-account .woocommerce a.button,
+.woocommerce-account .woocommerce button.button,
+.woocommerce-account .woocommerce input.button {
     font-family: var(--exp-font-heading) !important;
     font-weight: 600 !important;
     border-radius: var(--exp-radius-sm) !important;
@@ -1233,15 +1233,15 @@
 }
 
 /* Alternative / secondary buttons */
-.exp-styled-cart .woocommerce a.button.alt,
-.exp-styled-account .woocommerce a.button.alt {
+.woocommerce-cart .woocommerce a.button.alt,
+.woocommerce-account .woocommerce a.button.alt {
     background: var(--exp-bleu) !important;
     color: var(--exp-blanc-pur) !important;
     border: none !important;
 }
 
-.exp-styled-cart .woocommerce a.button.alt:hover,
-.exp-styled-account .woocommerce a.button.alt:hover {
+.woocommerce-cart .woocommerce a.button.alt:hover,
+.woocommerce-account .woocommerce a.button.alt:hover {
     background: var(--exp-orange) !important;
 }
 
