@@ -680,152 +680,20 @@
 
 
 /* ==========================================================================
-   5. MY ACCOUNT PAGE (Classic Shortcode)
+   5. MY ACCOUNT PAGE (Elementor Pro "Mon Compte" Widget)
+   Widget: elementor-widget-woocommerce-my-account
+   Layout: e-my-account-tabs-vertical
    ========================================================================== */
 
-/* ---- Login Form ---- */
-.woocommerce-account .woocommerce-form-login {
-    background: var(--exp-blanc-pur);
-    border: 1px solid var(--exp-gris-light) !important;
-    border-radius: var(--exp-radius-lg) !important;
-    padding: 40px !important;
-    margin: 0 auto;
-    max-width: 480px;
-    box-shadow: var(--exp-shadow-card);
+/* ---- Widget Container ---- */
+.elementor-widget-woocommerce-my-account {
+    font-family: var(--exp-font-body);
+    color: var(--exp-texte);
 }
 
-.woocommerce-account .woocommerce-form-login .woocommerce-form-row label {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    color: var(--exp-bleu) !important;
-    margin-bottom: 8px !important;
-    display: block;
-}
-
-.woocommerce-account .woocommerce-form-login .woocommerce-Input {
-    border: 1.5px solid var(--exp-bleu-transparent) !important;
-    border-radius: var(--exp-radius-sm) !important;
-    font-family: var(--exp-font-body) !important;
-    font-size: 14px !important;
-    padding: 12px 16px !important;
-    color: var(--exp-texte) !important;
-    background: var(--exp-blanc-pur) !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    transition: var(--exp-transition);
-}
-
-.woocommerce-account .woocommerce-form-login .woocommerce-Input:focus {
-    border-color: var(--exp-orange) !important;
-    box-shadow: 0 0 0 3px rgba(233, 79, 26, 0.1) !important;
-    outline: none !important;
-}
-
-/* Login submit button */
-.woocommerce-account .woocommerce-form-login .woocommerce-form-login__submit {
-    background: var(--exp-gradient-orange) !important;
-    color: var(--exp-blanc-pur) !important;
-    border: none !important;
-    border-radius: var(--exp-radius) !important;
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 700 !important;
-    font-size: 15px !important;
-    padding: 14px 32px !important;
-    cursor: pointer;
-    transition: var(--exp-transition);
-    box-shadow: 0 4px 14px rgba(233, 79, 26, 0.25);
-    letter-spacing: 0.02em;
-    width: 100%;
-}
-
-.woocommerce-account .woocommerce-form-login .woocommerce-form-login__submit:hover {
-    box-shadow: 0 6px 22px rgba(233, 79, 26, 0.35) !important;
-    transform: translateY(-1px);
-}
-
-/* Remember me checkbox */
-.woocommerce-account .woocommerce-form__label-for-checkbox {
-    font-family: var(--exp-font-body) !important;
-    font-size: 14px !important;
-    color: var(--exp-texte) !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-}
-
-.woocommerce-account .woocommerce-form__input-checkbox {
-    accent-color: var(--exp-orange) !important;
-    width: 18px !important;
-    height: 18px !important;
-}
-
-/* Lost password link */
-.woocommerce-account .woocommerce-LostPassword a {
-    color: var(--exp-orange) !important;
-    font-family: var(--exp-font-body) !important;
-    font-weight: 500 !important;
-    font-size: 14px !important;
-    text-decoration: none !important;
-    transition: var(--exp-transition);
-}
-
-.woocommerce-account .woocommerce-LostPassword a:hover {
-    color: var(--exp-orange-dark) !important;
-    text-decoration: underline !important;
-}
-
-/* ---- Register form (if enabled) ---- */
-.woocommerce-account .woocommerce-form-register {
-    background: var(--exp-blanc-pur);
-    border: 1px solid var(--exp-gris-light) !important;
-    border-radius: var(--exp-radius-lg) !important;
-    padding: 40px !important;
-    box-shadow: var(--exp-shadow-card);
-}
-
-.woocommerce-account .woocommerce-form-register h2 {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 700 !important;
-    font-size: 24px !important;
-    color: var(--exp-bleu) !important;
-    margin-bottom: 24px !important;
-}
-
-.woocommerce-account .woocommerce-form-register .woocommerce-Input {
-    border: 1.5px solid var(--exp-bleu-transparent) !important;
-    border-radius: var(--exp-radius-sm) !important;
-    font-family: var(--exp-font-body) !important;
-    font-size: 14px !important;
-    padding: 12px 16px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    transition: var(--exp-transition);
-}
-
-.woocommerce-account .woocommerce-form-register .woocommerce-Input:focus {
-    border-color: var(--exp-orange) !important;
-    box-shadow: 0 0 0 3px rgba(233, 79, 26, 0.1) !important;
-    outline: none !important;
-}
-
-.woocommerce-account .woocommerce-form-register .woocommerce-Button {
-    background: var(--exp-gradient-orange) !important;
-    color: var(--exp-blanc-pur) !important;
-    border: none !important;
-    border-radius: var(--exp-radius) !important;
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 700 !important;
-    font-size: 15px !important;
-    padding: 14px 32px !important;
-    cursor: pointer;
-    transition: var(--exp-transition);
-    box-shadow: 0 4px 14px rgba(233, 79, 26, 0.25);
-    width: 100%;
-}
-
-/* ---- Account Navigation ---- */
-.woocommerce-account .woocommerce-MyAccount-navigation {
+/* ---- Tab Navigation (vertical sidebar) ---- */
+.e-my-account-tabs-vertical .e-my-account-tab__dashboard nav,
+.elementor-widget-woocommerce-my-account nav[aria-label] {
     background: var(--exp-blanc-pur);
     border: 1px solid var(--exp-gris-light);
     border-radius: var(--exp-radius-lg);
@@ -834,18 +702,18 @@
     overflow: hidden;
 }
 
-.woocommerce-account .woocommerce-MyAccount-navigation ul {
+.elementor-widget-woocommerce-my-account nav ul {
     list-style: none !important;
     margin: 0 !important;
     padding: 0 !important;
 }
 
-.woocommerce-account .woocommerce-MyAccount-navigation ul li {
+.elementor-widget-woocommerce-my-account nav ul li {
     margin: 0 !important;
     padding: 0 !important;
 }
 
-.woocommerce-account .woocommerce-MyAccount-navigation ul li a {
+.elementor-widget-woocommerce-my-account nav ul li a {
     display: flex !important;
     align-items: center !important;
     gap: 12px;
@@ -859,289 +727,96 @@
     transition: var(--exp-transition);
 }
 
-.woocommerce-account .woocommerce-MyAccount-navigation ul li a:hover {
+.elementor-widget-woocommerce-my-account nav ul li a:hover {
     background: var(--exp-gris-light) !important;
     color: var(--exp-orange) !important;
 }
 
-.woocommerce-account .woocommerce-MyAccount-navigation ul li.is-active a,
-.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--dashboard.is-active a {
+.elementor-widget-woocommerce-my-account nav ul li a[aria-current="page"] {
     background: var(--exp-orange-light) !important;
     color: var(--exp-orange) !important;
     font-weight: 700 !important;
 }
 
-/* Add icons to navigation items via pseudo-elements */
-.woocommerce-account .woocommerce-MyAccount-navigation ul li a::before {
-    content: '';
-    display: inline-flex;
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.7;
-}
-
-.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--dashboard a::before {
-    content: '📊';
-    background: none;
-    font-size: 16px;
-}
-
-.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--orders a::before {
-    content: '📦';
-    background: none;
-    font-size: 16px;
-}
-
-.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--downloads a::before {
-    content: '⬇️';
-    background: none;
-    font-size: 16px;
-}
-
-.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--edit-address a::before {
-    content: '📍';
-    background: none;
-    font-size: 16px;
-}
-
-.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--edit-account a::before {
-    content: '👤';
-    background: none;
-    font-size: 16px;
-}
-
-.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--customer-logout a::before {
-    content: '🚪';
-    background: none;
-    font-size: 16px;
-}
-
-.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--payment-methods a::before {
-    content: '💳';
-    background: none;
-    font-size: 16px;
-}
-
-/* ---- Account Content Area ---- */
-.woocommerce-account .woocommerce-MyAccount-content {
-    background: var(--exp-blanc-pur);
-    border: 1px solid var(--exp-gris-light);
-    border-radius: var(--exp-radius-lg);
-    padding: 32px;
-    box-shadow: var(--exp-shadow-card);
+/* ---- Tab Content Area ---- */
+.e-my-account-tab {
     font-family: var(--exp-font-body);
     color: var(--exp-texte);
     line-height: 1.6;
 }
 
-.woocommerce-account .woocommerce-MyAccount-content p {
-    font-size: 15px;
-    margin-bottom: 16px;
+.e-my-account-tab .woocommerce {
+    background: var(--exp-blanc-pur);
+    border: 1px solid var(--exp-gris-light);
+    border-radius: var(--exp-radius-lg);
+    padding: 32px;
+    box-shadow: var(--exp-shadow-card);
 }
 
-.woocommerce-account .woocommerce-MyAccount-content a {
+.e-my-account-tab p {
+    font-size: 15px;
+    margin-bottom: 16px;
+    font-family: var(--exp-font-body);
+}
+
+.e-my-account-tab a {
     color: var(--exp-orange);
     font-weight: 600;
     text-decoration: none;
     transition: var(--exp-transition);
 }
 
-.woocommerce-account .woocommerce-MyAccount-content a:hover {
+.e-my-account-tab a:hover {
     color: var(--exp-orange-dark);
     text-decoration: underline;
 }
 
 /* Content headings */
-.woocommerce-account .woocommerce-MyAccount-content h2,
-.woocommerce-account .woocommerce-MyAccount-content h3 {
+.e-my-account-tab h2,
+.e-my-account-tab h3 {
     font-family: var(--exp-font-heading) !important;
     font-weight: 700 !important;
     color: var(--exp-bleu) !important;
     margin-bottom: 20px;
 }
 
-.woocommerce-account .woocommerce-MyAccount-content h2 {
+.e-my-account-tab h2 {
     font-size: 24px;
 }
 
-.woocommerce-account .woocommerce-MyAccount-content h3 {
+.e-my-account-tab h3 {
     font-size: 20px;
 }
 
-/* ---- Orders Table ---- */
-.woocommerce-account .woocommerce-orders-table {
-    width: 100% !important;
-    border-collapse: separate !important;
-    border-spacing: 0 !important;
-    border: none !important;
+/* ---- Login Form (inside Elementor widget) ---- */
+.e-my-account-tab .woocommerce-form-login,
+.woocommerce-account .e-my-account-tab .woocommerce-form-login {
+    background: var(--exp-blanc-pur);
+    border: 1px solid var(--exp-gris-light) !important;
+    border-radius: var(--exp-radius-lg) !important;
+    padding: 40px !important;
+    margin: 0 auto;
+    max-width: 480px;
+    box-shadow: var(--exp-shadow-card);
 }
 
-.woocommerce-account .woocommerce-orders-table thead th {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 700 !important;
-    font-size: 13px !important;
-    color: var(--exp-bleu) !important;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    background: var(--exp-gris-light) !important;
-    padding: 14px 16px !important;
-    border: none !important;
+.e-my-account-tab .woocommerce-form-login h2 {
+    text-align: center;
+    margin-bottom: 28px !important;
+    font-size: 26px;
 }
 
-.woocommerce-account .woocommerce-orders-table thead th:first-child {
-    border-radius: var(--exp-radius-sm) 0 0 var(--exp-radius-sm);
-}
-
-.woocommerce-account .woocommerce-orders-table thead th:last-child {
-    border-radius: 0 var(--exp-radius-sm) var(--exp-radius-sm) 0;
-}
-
-.woocommerce-account .woocommerce-orders-table tbody td {
-    font-family: var(--exp-font-body) !important;
-    font-size: 14px !important;
-    color: var(--exp-texte) !important;
-    padding: 16px !important;
-    border-bottom: 1px solid var(--exp-gris-light) !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    vertical-align: middle;
-}
-
-.woocommerce-account .woocommerce-orders-table tbody tr:hover td {
-    background: var(--exp-gris-light);
-}
-
-/* Order number link */
-.woocommerce-account .woocommerce-orders-table .woocommerce-orders-table__cell-order-number a {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 700 !important;
-    color: var(--exp-orange) !important;
-    text-decoration: none !important;
-}
-
-.woocommerce-account .woocommerce-orders-table .woocommerce-orders-table__cell-order-number a:hover {
-    text-decoration: underline !important;
-}
-
-/* View order button */
-.woocommerce-account .woocommerce-orders-table .woocommerce-button.button.view {
-    background: var(--exp-bleu) !important;
-    color: var(--exp-blanc-pur) !important;
-    border: none !important;
-    border-radius: var(--exp-radius-sm) !important;
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 600 !important;
-    font-size: 13px !important;
-    padding: 8px 18px !important;
-    transition: var(--exp-transition);
-    text-decoration: none !important;
-}
-
-.woocommerce-account .woocommerce-orders-table .woocommerce-button.button.view:hover {
-    background: var(--exp-orange) !important;
-    box-shadow: var(--exp-shadow-hover);
-}
-
-/* Order status badges */
-.woocommerce-account .woocommerce-orders-table .woocommerce-orders-table__cell-order-status {
-    font-weight: 600 !important;
-}
-
-/* No orders message */
-.woocommerce-account .woocommerce-message--info,
-.woocommerce-account .woocommerce-info {
-    background: var(--exp-orange-light) !important;
-    border: 1px solid var(--exp-orange-border) !important;
-    border-radius: var(--exp-radius-sm) !important;
-    color: var(--exp-orange-dark) !important;
-    font-family: var(--exp-font-body) !important;
-    padding: 16px 20px !important;
-}
-
-.woocommerce-account .woocommerce-info::before {
-    color: var(--exp-orange) !important;
-}
-
-/* ---- Addresses Section ---- */
-.woocommerce-account .woocommerce-Addresses {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-}
-
-.woocommerce-account .woocommerce-Address {
-    flex: 1;
-    min-width: 280px;
-}
-
-.woocommerce-account .woocommerce-Address-title h3 {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 700 !important;
-    font-size: 18px !important;
-    color: var(--exp-bleu) !important;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.woocommerce-account .woocommerce-Address-title .edit {
-    font-family: var(--exp-font-heading) !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    color: var(--exp-orange) !important;
-    text-decoration: none !important;
-    background: var(--exp-orange-light);
-    padding: 6px 14px;
-    border-radius: var(--exp-radius-pill);
-    transition: var(--exp-transition);
-}
-
-.woocommerce-account .woocommerce-Address-title .edit:hover {
-    background: var(--exp-orange);
-    color: var(--exp-blanc-pur) !important;
-}
-
-.woocommerce-account .woocommerce-Address address {
-    background: var(--exp-gris-light);
-    border-radius: var(--exp-radius-sm);
-    padding: 20px;
-    font-family: var(--exp-font-body);
-    font-size: 14px;
-    line-height: 1.8;
-    color: var(--exp-texte);
-    font-style: normal !important;
-}
-
-/* ---- Edit Account / Address Forms ---- */
-.woocommerce-account .woocommerce-EditAccountForm,
-.woocommerce-account .woocommerce-address-fields {
-    max-width: 600px;
-}
-
-.woocommerce-account .woocommerce-EditAccountForm .form-row label,
-.woocommerce-account .woocommerce-address-fields .form-row label {
+.e-my-account-tab .woocommerce-form-login .woocommerce-form-row label {
     font-family: var(--exp-font-heading) !important;
     font-weight: 600 !important;
     font-size: 14px !important;
     color: var(--exp-bleu) !important;
     margin-bottom: 8px !important;
-    display: block !important;
+    display: block;
 }
 
-.woocommerce-account .woocommerce-EditAccountForm .form-row label .required,
-.woocommerce-account .woocommerce-address-fields .form-row label .required {
-    color: var(--exp-orange) !important;
-}
-
-.woocommerce-account .woocommerce-EditAccountForm .form-row input,
-.woocommerce-account .woocommerce-EditAccountForm .form-row select,
-.woocommerce-account .woocommerce-address-fields .form-row input,
-.woocommerce-account .woocommerce-address-fields .form-row select {
+.e-my-account-tab .woocommerce-form-login .woocommerce-Input,
+.e-my-account-tab .woocommerce-Input {
     border: 1.5px solid var(--exp-bleu-transparent) !important;
     border-radius: var(--exp-radius-sm) !important;
     font-family: var(--exp-font-body) !important;
@@ -1154,21 +829,290 @@
     transition: var(--exp-transition);
 }
 
-.woocommerce-account .woocommerce-EditAccountForm .form-row input:focus,
-.woocommerce-account .woocommerce-EditAccountForm .form-row select:focus,
-.woocommerce-account .woocommerce-address-fields .form-row input:focus,
-.woocommerce-account .woocommerce-address-fields .form-row select:focus {
+.e-my-account-tab .woocommerce-Input:focus {
     border-color: var(--exp-orange) !important;
     box-shadow: 0 0 0 3px rgba(233, 79, 26, 0.1) !important;
     outline: none !important;
 }
 
-/* Save button */
-.woocommerce-account .woocommerce-EditAccountForm .woocommerce-Button,
-.woocommerce-account .woocommerce-address-fields .woocommerce-Button,
-.woocommerce-account .woocommerce-MyAccount-content .woocommerce-Button,
-.woocommerce-account .woocommerce-MyAccount-content button[type="submit"],
-.woocommerce-account .woocommerce-form .button {
+/* Login submit button */
+.e-my-account-tab .woocommerce-form-login__submit,
+.e-my-account-tab .woocommerce-button.button.woocommerce-form-login__submit {
+    background: var(--exp-gradient-orange) !important;
+    color: var(--exp-blanc-pur) !important;
+    border: none !important;
+    border-radius: var(--exp-radius) !important;
+    font-family: var(--exp-font-heading) !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    padding: 14px 32px !important;
+    cursor: pointer;
+    transition: var(--exp-transition);
+    box-shadow: 0 4px 14px rgba(233, 79, 26, 0.25);
+    letter-spacing: 0.02em;
+    width: 100%;
+}
+
+.e-my-account-tab .woocommerce-form-login__submit:hover {
+    box-shadow: 0 6px 22px rgba(233, 79, 26, 0.35) !important;
+    transform: translateY(-1px);
+}
+
+/* Remember me checkbox */
+.e-my-account-tab .woocommerce-form__label-for-checkbox {
+    font-family: var(--exp-font-body) !important;
+    font-size: 14px !important;
+    color: var(--exp-texte) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.e-my-account-tab .woocommerce-form__input-checkbox {
+    accent-color: var(--exp-orange) !important;
+    width: 18px !important;
+    height: 18px !important;
+}
+
+/* Lost password link */
+.e-my-account-tab .woocommerce-LostPassword a {
+    color: var(--exp-orange) !important;
+    font-family: var(--exp-font-body) !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    transition: var(--exp-transition);
+}
+
+.e-my-account-tab .woocommerce-LostPassword a:hover {
+    color: var(--exp-orange-dark) !important;
+    text-decoration: underline !important;
+}
+
+/* ---- Register form (if enabled) ---- */
+.e-my-account-tab .woocommerce-form-register {
+    background: var(--exp-blanc-pur);
+    border: 1px solid var(--exp-gris-light) !important;
+    border-radius: var(--exp-radius-lg) !important;
+    padding: 40px !important;
+    box-shadow: var(--exp-shadow-card);
+}
+
+.e-my-account-tab .woocommerce-form-register .woocommerce-Input {
+    border: 1.5px solid var(--exp-bleu-transparent) !important;
+    border-radius: var(--exp-radius-sm) !important;
+    font-family: var(--exp-font-body) !important;
+    font-size: 14px !important;
+    padding: 12px 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: var(--exp-transition);
+}
+
+.e-my-account-tab .woocommerce-form-register .woocommerce-Button {
+    background: var(--exp-gradient-orange) !important;
+    color: var(--exp-blanc-pur) !important;
+    border: none !important;
+    border-radius: var(--exp-radius) !important;
+    font-family: var(--exp-font-heading) !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    padding: 14px 32px !important;
+    cursor: pointer;
+    transition: var(--exp-transition);
+    box-shadow: 0 4px 14px rgba(233, 79, 26, 0.25);
+    width: 100%;
+}
+
+/* ---- Orders Table ---- */
+.e-my-account-tab .woocommerce-orders-table {
+    width: 100% !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border: none !important;
+}
+
+.e-my-account-tab .woocommerce-orders-table thead th {
+    font-family: var(--exp-font-heading) !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    color: var(--exp-bleu) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--exp-gris-light) !important;
+    padding: 14px 16px !important;
+    border: none !important;
+}
+
+.e-my-account-tab .woocommerce-orders-table thead th:first-child {
+    border-radius: var(--exp-radius-sm) 0 0 var(--exp-radius-sm);
+}
+
+.e-my-account-tab .woocommerce-orders-table thead th:last-child {
+    border-radius: 0 var(--exp-radius-sm) var(--exp-radius-sm) 0;
+}
+
+.e-my-account-tab .woocommerce-orders-table tbody td {
+    font-family: var(--exp-font-body) !important;
+    font-size: 14px !important;
+    color: var(--exp-texte) !important;
+    padding: 16px !important;
+    border-bottom: 1px solid var(--exp-gris-light) !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    vertical-align: middle;
+}
+
+.e-my-account-tab .woocommerce-orders-table tbody tr:hover td {
+    background: var(--exp-gris-light);
+}
+
+/* Order number link */
+.e-my-account-tab .woocommerce-orders-table__cell-order-number a {
+    font-family: var(--exp-font-heading) !important;
+    font-weight: 700 !important;
+    color: var(--exp-orange) !important;
+    text-decoration: none !important;
+}
+
+.e-my-account-tab .woocommerce-orders-table__cell-order-number a:hover {
+    text-decoration: underline !important;
+}
+
+/* View order button */
+.e-my-account-tab .woocommerce-button.button.view {
+    background: var(--exp-bleu) !important;
+    color: var(--exp-blanc-pur) !important;
+    border: none !important;
+    border-radius: var(--exp-radius-sm) !important;
+    font-family: var(--exp-font-heading) !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    padding: 8px 18px !important;
+    transition: var(--exp-transition);
+    text-decoration: none !important;
+}
+
+.e-my-account-tab .woocommerce-button.button.view:hover {
+    background: var(--exp-orange) !important;
+    box-shadow: var(--exp-shadow-hover);
+}
+
+/* No orders message */
+.e-my-account-tab .woocommerce-message--info,
+.e-my-account-tab .woocommerce-info,
+.woocommerce-account .woocommerce-info {
+    background: var(--exp-orange-light) !important;
+    border: 1px solid var(--exp-orange-border) !important;
+    border-radius: var(--exp-radius-sm) !important;
+    color: var(--exp-orange-dark) !important;
+    font-family: var(--exp-font-body) !important;
+    padding: 16px 20px !important;
+}
+
+.e-my-account-tab .woocommerce-info::before,
+.woocommerce-account .woocommerce-info::before {
+    color: var(--exp-orange) !important;
+}
+
+/* ---- Addresses Section ---- */
+.e-my-account-tab .woocommerce-Addresses {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.e-my-account-tab .woocommerce-Address {
+    flex: 1;
+    min-width: 280px;
+}
+
+.e-my-account-tab .woocommerce-Address-title h3 {
+    font-family: var(--exp-font-heading) !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    color: var(--exp-bleu) !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.e-my-account-tab .woocommerce-Address-title .edit {
+    font-family: var(--exp-font-heading) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: var(--exp-orange) !important;
+    text-decoration: none !important;
+    background: var(--exp-orange-light);
+    padding: 6px 14px;
+    border-radius: var(--exp-radius-pill);
+    transition: var(--exp-transition);
+}
+
+.e-my-account-tab .woocommerce-Address-title .edit:hover {
+    background: var(--exp-orange);
+    color: var(--exp-blanc-pur) !important;
+}
+
+.e-my-account-tab .woocommerce-Address address {
+    background: var(--exp-gris-light);
+    border-radius: var(--exp-radius-sm);
+    padding: 20px;
+    font-family: var(--exp-font-body);
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--exp-texte);
+    font-style: normal !important;
+}
+
+/* ---- Edit Account / Address Forms ---- */
+.e-my-account-tab .woocommerce-EditAccountForm,
+.e-my-account-tab .woocommerce-address-fields {
+    max-width: 600px;
+}
+
+.e-my-account-tab .woocommerce-EditAccountForm .form-row label,
+.e-my-account-tab .woocommerce-address-fields .form-row label {
+    font-family: var(--exp-font-heading) !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: var(--exp-bleu) !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+}
+
+.e-my-account-tab .form-row label .required {
+    color: var(--exp-orange) !important;
+}
+
+.e-my-account-tab .woocommerce-EditAccountForm .form-row input,
+.e-my-account-tab .woocommerce-EditAccountForm .form-row select,
+.e-my-account-tab .woocommerce-address-fields .form-row input,
+.e-my-account-tab .woocommerce-address-fields .form-row select {
+    border: 1.5px solid var(--exp-bleu-transparent) !important;
+    border-radius: var(--exp-radius-sm) !important;
+    font-family: var(--exp-font-body) !important;
+    font-size: 14px !important;
+    padding: 12px 16px !important;
+    color: var(--exp-texte) !important;
+    background: var(--exp-blanc-pur) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: var(--exp-transition);
+}
+
+.e-my-account-tab .form-row input:focus,
+.e-my-account-tab .form-row select:focus {
+    border-color: var(--exp-orange) !important;
+    box-shadow: 0 0 0 3px rgba(233, 79, 26, 0.1) !important;
+    outline: none !important;
+}
+
+/* Save / Submit buttons */
+.e-my-account-tab .woocommerce-Button,
+.e-my-account-tab button[type="submit"],
+.e-my-account-tab .woocommerce-form .button {
     background: var(--exp-gradient-orange) !important;
     color: var(--exp-blanc-pur) !important;
     border: none !important;
@@ -1183,17 +1127,15 @@
     letter-spacing: 0.02em;
 }
 
-.woocommerce-account .woocommerce-EditAccountForm .woocommerce-Button:hover,
-.woocommerce-account .woocommerce-address-fields .woocommerce-Button:hover,
-.woocommerce-account .woocommerce-MyAccount-content .woocommerce-Button:hover,
-.woocommerce-account .woocommerce-MyAccount-content button[type="submit"]:hover,
-.woocommerce-account .woocommerce-form .button:hover {
+.e-my-account-tab .woocommerce-Button:hover,
+.e-my-account-tab button[type="submit"]:hover,
+.e-my-account-tab .woocommerce-form .button:hover {
     box-shadow: 0 6px 22px rgba(233, 79, 26, 0.35) !important;
     transform: translateY(-1px);
 }
 
 /* ---- Password strength meter ---- */
-.woocommerce-account .woocommerce-password-strength {
+.e-my-account-tab .woocommerce-password-strength {
     font-family: var(--exp-font-body) !important;
     font-size: 13px !important;
     padding: 8px 14px !important;
@@ -1202,6 +1144,7 @@
 }
 
 /* ---- WooCommerce Notices ---- */
+.e-my-account-tab .woocommerce-message,
 .woocommerce-account .woocommerce-message,
 .woocommerce-cart .woocommerce-message {
     background: #F0FFF0 !important;
@@ -1212,6 +1155,7 @@
     color: #2D6A2E !important;
 }
 
+.e-my-account-tab .woocommerce-error,
 .woocommerce-account .woocommerce-error,
 .woocommerce-cart .woocommerce-error {
     background: #FFF0F0 !important;
@@ -1223,12 +1167,18 @@
     list-style: none !important;
 }
 
+/* ---- Notices wrapper ---- */
+.e-my-account-tab .woocommerce-notices-wrapper {
+    margin-bottom: 16px;
+}
+
 
 /* ==========================================================================
    6. FORMS & INPUTS (Shared overrides)
    ========================================================================== */
 
 /* Select2 dropdowns (used in address forms) */
+.e-my-account-tab .select2-container--default .select2-selection--single,
 .woocommerce-account .select2-container--default .select2-selection--single {
     border: 1.5px solid var(--exp-bleu-transparent) !important;
     border-radius: var(--exp-radius-sm) !important;
@@ -1236,6 +1186,7 @@
     padding: 8px 16px !important;
 }
 
+.e-my-account-tab .select2-container--default .select2-selection--single .select2-selection__rendered,
 .woocommerce-account .select2-container--default .select2-selection--single .select2-selection__rendered {
     font-family: var(--exp-font-body) !important;
     font-size: 14px !important;
@@ -1243,27 +1194,32 @@
     line-height: 28px !important;
 }
 
+.e-my-account-tab .select2-container--default .select2-selection--single .select2-selection__arrow,
 .woocommerce-account .select2-container--default .select2-selection--single .select2-selection__arrow {
     top: 10px !important;
     right: 12px !important;
 }
 
+.e-my-account-tab .select2-container--default.select2-container--open .select2-selection--single,
 .woocommerce-account .select2-container--default.select2-container--open .select2-selection--single {
     border-color: var(--exp-orange) !important;
     box-shadow: 0 0 0 3px rgba(233, 79, 26, 0.1) !important;
 }
 
+.e-my-account-tab .select2-dropdown,
 .woocommerce-account .select2-dropdown {
     border: 1.5px solid var(--exp-bleu-transparent) !important;
     border-radius: 0 0 var(--exp-radius-sm) var(--exp-radius-sm) !important;
     box-shadow: var(--exp-shadow) !important;
 }
 
+.e-my-account-tab .select2-results__option--highlighted,
 .woocommerce-account .select2-results__option--highlighted {
     background: var(--exp-orange-light) !important;
     color: var(--exp-orange) !important;
 }
 
+.e-my-account-tab .select2-results__option--selected,
 .woocommerce-account .select2-results__option--selected {
     background: var(--exp-orange) !important;
     color: var(--exp-blanc-pur) !important;
@@ -1350,39 +1306,39 @@
     }
     
     /* Account navigation */
-    .woocommerce-account .woocommerce-MyAccount-navigation {
+    .elementor-widget-woocommerce-my-account nav {
         margin-bottom: 20px;
     }
-    
-    .woocommerce-account .woocommerce-MyAccount-navigation ul li a {
+
+    .elementor-widget-woocommerce-my-account nav ul li a {
         padding: 12px 16px !important;
         font-size: 14px !important;
     }
     
     /* Account content */
-    .woocommerce-account .woocommerce-MyAccount-content {
+    .e-my-account-tab .woocommerce {
         padding: 20px;
         border-radius: var(--exp-radius);
     }
     
     /* Login form */
-    .woocommerce-account .woocommerce-form-login {
+    .e-my-account-tab .woocommerce-form-login {
         padding: 24px !important;
         border-radius: var(--exp-radius) !important;
     }
     
     /* Orders table responsive */
-    .woocommerce-account .woocommerce-orders-table {
+    .e-my-account-tab .woocommerce-orders-table {
         font-size: 13px !important;
     }
     
-    .woocommerce-account .woocommerce-orders-table thead th,
-    .woocommerce-account .woocommerce-orders-table tbody td {
+    .e-my-account-tab .woocommerce-orders-table thead th,
+    .e-my-account-tab .woocommerce-orders-table tbody td {
         padding: 10px 8px !important;
     }
     
     /* Addresses stacked */
-    .woocommerce-account .woocommerce-Addresses {
+    .e-my-account-tab .woocommerce-Addresses {
         flex-direction: column;
     }
     
@@ -1423,11 +1379,11 @@
     }
     
     /* Login form full width */
-    .woocommerce-account .woocommerce-form-login {
+    .e-my-account-tab .woocommerce-form-login {
         padding: 20px !important;
     }
     
-    .woocommerce-account .woocommerce-form-login .woocommerce-form-login__submit {
+    .e-my-account-tab .woocommerce-form-login__submit {
         padding: 12px 24px !important;
     }
 }
