@@ -1,14 +1,17 @@
 /* ==========================================================================
    EXP Cart & Account — Design System Express Échafaudage
-   Version: 3.2.0 — Fix hover bouton valider + cross-sells
+   Version: 3.2.1 — Suppression box-shadow + cross-sells fallback catégorie
    
    Règle : NE PAS toucher width, flex, display, position, float, padding layout
    On cible uniquement : couleurs, typo, border-radius, backgrounds, boutons
    
    CHANGELOG v3.2.0 :
-   - FIX : hover bouton "Valider la commande" → fond blanc, bordure orange 1px, texte orange, radius 26, sans box-shadow
-   - ADD : styles cross-sells "Vous seriez peut-être intéressé par"
-   - ADD : injection PHP des cross-sells dans le panier
+   CHANGELOG v3.2.1 :
+   - FIX : suppression de TOUS les box-shadow sur boutons (aucun state)
+   - FIX : texte blanc sur bouton valider en state normal
+   - FIX : hover bouton valider → fond blanc, bordure orange 1px, texte orange, radius 26
+   - ADD : cross-sells avec fallback intelligent (cross-sells WC → même catégorie → produits récents)
+   - ADD : injection JS pour panier bloc-based avec MutationObserver
    
    CHANGELOG v3.0.0 :
    - FIX : couleur texte boutons #B1B0B0 → #FFFFFF (illisible sur fond orange)
@@ -174,7 +177,7 @@
     font-weight: 700 !important;
     font-size: 15px !important;
     letter-spacing: 0.02em;
-    box-shadow: var(--exp-shadow-btn);
+    box-shadow: none;
     transition: var(--exp-transition);
 }
 
@@ -267,13 +270,13 @@
     font-family: var(--exp-font-heading) !important;
     font-weight: 600 !important;
     font-size: 13px !important;
-    box-shadow: var(--exp-shadow-btn);
+    box-shadow: none;
     transition: var(--exp-transition);
 }
 
 .woocommerce-cart .wc-block-grid__product .wp-element-button:hover,
 .woocommerce-cart .wc-block-grid__product .add_to_cart_button:hover {
-    box-shadow: var(--exp-shadow-btn-hover) !important;
+    box-shadow: none !important;
     transform: translateY(-1px);
     color: #FFFFFF !important;
 }
@@ -314,7 +317,7 @@
 .woocommerce-cart .cross-sells .wc-block-grid__product:hover,
 .woocommerce-cart .wc-block-cart__cross-sells .wc-block-grid__product:hover {
     border-color: var(--exp-orange) !important;
-    box-shadow: 0 4px 12px rgba(233, 79, 26, 0.1) !important;
+    box-shadow: none !important;
 }
 
 .woocommerce-cart .cross-sells .wc-block-grid__product-title,
@@ -382,7 +385,7 @@
 
 .exp-cross-sell-item:hover {
     border-color: var(--exp-orange) !important;
-    box-shadow: 0 4px 12px rgba(233, 79, 26, 0.1) !important;
+    box-shadow: none !important;
 }
 
 .exp-cross-sell-link {
@@ -566,12 +569,12 @@
     font-weight: 700 !important;
     font-size: 15px !important;
     letter-spacing: 0.02em;
-    box-shadow: var(--exp-shadow-btn);
+    box-shadow: none;
     transition: var(--exp-transition);
 }
 
 .woocommerce-checkout .wc-block-components-checkout-place-order-button:hover {
-    box-shadow: var(--exp-shadow-btn-hover) !important;
+    box-shadow: none !important;
     transform: translateY(-1px);
     color: #FFFFFF !important;
 }
@@ -672,7 +675,7 @@
     font-family: var(--exp-font-heading) !important;
     font-weight: 700 !important;
     letter-spacing: 0.02em;
-    box-shadow: var(--exp-shadow-btn);
+    box-shadow: none;
     transition: var(--exp-transition);
 }
 
@@ -680,7 +683,7 @@
 .elementor-widget-woocommerce-my-account .woocommerce-Button:hover,
 .elementor-widget-woocommerce-my-account button[type="submit"]:hover,
 .elementor-widget-woocommerce-my-account .woocommerce .button:not(.view):hover {
-    box-shadow: var(--exp-shadow-btn-hover) !important;
+    box-shadow: none !important;
     transform: translateY(-1px);
     color: #FFFFFF !important;
 }
@@ -863,12 +866,12 @@
     border-radius: var(--exp-radius) !important;
     font-family: var(--exp-font-heading) !important;
     font-weight: 700 !important;
-    box-shadow: var(--exp-shadow-btn);
+    box-shadow: none;
     transition: var(--exp-transition);
 }
 
 .woocommerce-page .wp-element-button:not(.wc-block-components-quantity-selector__button):hover {
-    box-shadow: var(--exp-shadow-btn-hover) !important;
+    box-shadow: none !important;
     transform: translateY(-1px);
     color: #FFFFFF !important;
 }
