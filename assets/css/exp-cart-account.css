@@ -1,6 +1,6 @@
 /* ==========================================================================
    EXP Cart & Account — Design System Express Échafaudage
-   Version: 3.4.0 — Responsive mobile panier complet
+   Version: 3.5.0 — Panier vide custom + suppression cross-sells + responsive container queries
    
    Règle : NE PAS toucher width, flex, display, position, float, padding layout
    On cible uniquement : couleurs, typo, border-radius, backgrounds, boutons
@@ -10,7 +10,7 @@
    - FIX : suppression de TOUS les box-shadow sur boutons (aucun state)
    - FIX : texte blanc sur bouton valider en state normal
    - FIX : hover bouton valider → fond blanc, bordure orange 1px, texte orange, radius 26
-   - ADD : cross-sells avec fallback intelligent (cross-sells WC → même catégorie → produits récents)
+   - ADD : suppression cross-sells (géré manuellement dans Elementor)
    - ADD : injection JS pour panier bloc-based avec MutationObserver
    
    CHANGELOG v3.0.0 :
@@ -83,7 +83,6 @@
 
 /* Titres de sections WC blocks */
 .woocommerce-cart .wp-block-heading,
-.woocommerce-cart .cross-sells h2,
 .woocommerce-checkout .wp-block-heading {
     font-family: var(--exp-font-heading) !important;
     font-weight: 700 !important;
@@ -286,222 +285,132 @@
     opacity: 0.7;
 }
 
-/* --- Cross-sells : "Vous seriez peut-être intéressé par..." --- */
-.woocommerce-cart .cross-sells,
-.woocommerce-cart .wp-block-woocommerce-cart-cross-sells-block,
-.woocommerce-cart .wc-block-cart__cross-sells {
-    margin-top: 40px !important;
-    padding-top: 30px !important;
-    border-top: 1px solid var(--exp-gris-light) !important;
+
+/* ==========================================================================
+   4b. EMPTY CART — Panier vide custom
+   ========================================================================== */
+
+/* Hide default WC empty cart content */
+.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wp-block-heading,
+.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wp-block-separator,
+.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wp-block-woocommerce-product-new,
+.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wc-block-grid {
+    display: none !important;
 }
 
-.woocommerce-cart .cross-sells h2,
-.woocommerce-cart .wp-block-woocommerce-cart-cross-sells-block h2,
-.woocommerce-cart .wc-block-cart__cross-sells h2 {
+/* Custom empty cart */
+.exp-empty-cart {
+    padding: 80px 20px !important;
+    text-align: center;
+}
+
+.exp-empty-cart__inner {
+    max-width: 440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.exp-empty-cart__icon {
+    margin-bottom: 8px;
+}
+
+.exp-empty-cart__icon svg {
+    display: block;
+}
+
+.exp-empty-cart__title {
     font-family: var(--exp-font-heading) !important;
+    font-size: 26px !important;
     font-weight: 700 !important;
     color: var(--exp-bleu) !important;
-    font-size: 22px !important;
-    margin-bottom: 20px !important;
+    margin: 0 !important;
 }
 
-.woocommerce-cart .cross-sells .wc-block-grid__product,
-.woocommerce-cart .wc-block-cart__cross-sells .wc-block-grid__product {
-    border-radius: var(--exp-radius) !important;
-    overflow: hidden !important;
-    background: #FFFFFF !important;
-    border: 1px solid var(--exp-gris-light) !important;
-    transition: var(--exp-transition) !important;
+.exp-empty-cart__text {
+    font-family: var(--exp-font-body) !important;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--exp-texte);
+    margin: 0;
 }
 
-.woocommerce-cart .cross-sells .wc-block-grid__product:hover,
-.woocommerce-cart .wc-block-cart__cross-sells .wc-block-grid__product:hover {
-    border-color: var(--exp-orange) !important;
-    box-shadow: none !important;
+.exp-empty-cart__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px 14px 28px;
+    background: var(--exp-gradient-orange) !important;
+    color: #FBFBFB !important;
+    border-radius: var(--exp-radius-lg, 26px);
+    font-family: var(--exp-font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--exp-transition);
+    margin-top: 8px;
 }
 
-.woocommerce-cart .cross-sells .wc-block-grid__product-title,
-.woocommerce-cart .wc-block-cart__cross-sells .wc-block-grid__product-title {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 600 !important;
-    color: var(--exp-bleu) !important;
-    text-decoration: none !important;
-    font-size: 14px !important;
+.exp-empty-cart__btn:hover {
+    opacity: 0.9;
+    color: #FBFBFB !important;
+    text-decoration: none;
 }
 
-.woocommerce-cart .cross-sells .wc-block-grid__product-price,
-.woocommerce-cart .wc-block-cart__cross-sells .wc-block-grid__product-price {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 700 !important;
+.exp-empty-cart__btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.exp-empty-cart__btn-icon svg {
+    width: 14px;
+    height: auto;
+}
+
+.exp-empty-cart__contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.exp-empty-cart__contact-text {
+    font-family: var(--exp-font-body);
+    font-size: 13px;
+    color: var(--exp-texte);
+}
+
+.exp-empty-cart__phone {
+    font-family: var(--exp-font-heading);
+    font-size: 14px;
+    font-weight: 600;
     color: var(--exp-orange) !important;
+    text-decoration: none;
 }
 
-.woocommerce-cart .cross-sells .wp-block-button__link,
-.woocommerce-cart .wc-block-cart__cross-sells .wp-block-button__link {
-    background: var(--exp-bleu) !important;
-    color: #FFFFFF !important;
-    border-radius: var(--exp-radius-sm) !important;
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 600 !important;
-    font-size: 13px !important;
-    border: none !important;
-    transition: var(--exp-transition) !important;
+.exp-empty-cart__phone:hover {
+    text-decoration: underline;
 }
 
-.woocommerce-cart .cross-sells .wp-block-button__link:hover,
-.woocommerce-cart .wc-block-cart__cross-sells .wp-block-button__link:hover {
-    background: var(--exp-orange) !important;
-    color: #FFFFFF !important;
-}
-
-/* --- Cross-sells : injection PHP (exp-cross-sells) --- */
-.exp-cross-sells {
-    margin-top: 40px !important;
-    padding-top: 30px !important;
-    border-top: 1px solid var(--exp-gris-light) !important;
-}
-
-.exp-cross-sells h2 {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 700 !important;
-    color: var(--exp-bleu) !important;
-    font-size: 22px !important;
-    margin-bottom: 24px !important;
-}
-
-.exp-cross-sells-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 20px !important;
-}
-
-.exp-cross-sell-item {
-    background: #FFFFFF !important;
-    border: 1px solid var(--exp-gris-light) !important;
-    border-radius: var(--exp-radius) !important;
-    overflow: hidden !important;
-    transition: var(--exp-transition) !important;
-}
-
-.exp-cross-sell-item:hover {
-    border-color: var(--exp-orange) !important;
-    box-shadow: none !important;
-}
-
-.exp-cross-sell-link {
-    text-decoration: none !important;
-    display: block !important;
-}
-
-.exp-cross-sell-image {
-    position: relative !important;
-    overflow: hidden !important;
-    background: var(--exp-gris-light) !important;
-}
-
-.exp-cross-sell-image img {
-    width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    aspect-ratio: 1/1 !important;
-    object-fit: cover !important;
-}
-
-.exp-cross-sell-badge {
-    position: absolute !important;
-    top: 10px !important;
-    left: 10px !important;
-    background: var(--exp-orange) !important;
-    color: #FFFFFF !important;
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 600 !important;
-    font-size: 11px !important;
-    padding: 4px 10px !important;
-    border-radius: 20px !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.03em !important;
-}
-
-.exp-cross-sell-info {
-    padding: 14px 16px 10px !important;
-}
-
-.exp-cross-sell-title {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 600 !important;
-    color: var(--exp-bleu) !important;
-    font-size: 14px !important;
-    line-height: 1.3 !important;
-    margin: 0 0 6px !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-}
-
-.exp-cross-sell-price {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 700 !important;
-    color: var(--exp-orange) !important;
-    font-size: 16px !important;
-}
-
-.exp-cross-sell-price del {
-    color: var(--exp-gris) !important;
-    font-size: 13px !important;
-    font-weight: 400 !important;
-}
-
-.exp-cross-sell-price ins {
-    text-decoration: none !important;
-}
-
-.exp-cross-sell-action {
-    padding: 0 16px 14px !important;
-}
-
-.exp-cross-sell-btn {
-    display: block !important;
-    text-align: center !important;
-    background: var(--exp-bleu) !important;
-    color: #FFFFFF !important;
-    border-radius: var(--exp-radius-sm) !important;
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 600 !important;
-    font-size: 13px !important;
-    padding: 10px 16px !important;
-    text-decoration: none !important;
-    transition: var(--exp-transition) !important;
-    border: none !important;
-    cursor: pointer !important;
-}
-
-.exp-cross-sell-btn:hover {
-    background: var(--exp-orange) !important;
-    color: #FFFFFF !important;
-}
-
-/* Responsive cross-sells */
-@media (max-width: 1024px) {
-    .exp-cross-sells-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
+@media (max-width: 767px) {
+    .exp-empty-cart {
+        padding: 50px 16px !important;
     }
-}
 
-@media (max-width: 768px) {
-    .exp-cross-sells-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 14px !important;
+    .exp-empty-cart__title {
+        font-size: 22px !important;
     }
-    
-    .exp-cross-sells h2 {
-        font-size: 18px !important;
-    }
-}
 
-@media (max-width: 480px) {
-    .exp-cross-sells-grid {
-        grid-template-columns: 1fr !important;
+    .exp-empty-cart__text {
+        font-size: 14px;
     }
 }
 
@@ -885,7 +794,7 @@
 
 /* ==========================================================================
    9. RESPONSIVE — Cart & Checkout mobile
-   Version: 3.4.0
+   Version: 3.5.0
    
    NOTE: WooCommerce blocks utilisent CSS Container Queries (@container)
    pour le layout interne (2 col → 1 col à 699px container width).
@@ -941,14 +850,9 @@
         border-radius: var(--exp-radius-lg, 26px) !important;
     }
 
-    /* Cross-sells */
-    .woocommerce-cart .exp-cross-sells h2 {
-        font-size: 16px !important;
-    }
-
     /* Panier vide */
-    .woocommerce-cart .wp-block-woocommerce-empty-cart-block {
-        padding: 40px 8px !important;
+    .exp-empty-cart {
+        padding: 50px 12px !important;
         text-align: center !important;
     }
 

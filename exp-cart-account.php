@@ -2,7 +2,7 @@
 /**
  * Plugin Name: EXP Cart & Account
  * Description: Personnalisation des pages Panier, Checkout et Mon Compte selon le design system Express Échafaudage.
- * Version: 3.4.0
+ * Version: 3.5.0
  * Author: Commpagnie
  * Author URI: https://commpagnie.fr
  * Text Domain: exp-cart-account
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('EXP_CA_VERSION', '3.4.0');
+define('EXP_CA_VERSION', '3.5.0');
 define('EXP_CA_PATH', plugin_dir_path(__FILE__));
 define('EXP_CA_URL', plugin_dir_url(__FILE__));
 
@@ -52,225 +52,102 @@ function exp_ca_body_classes($classes) {
 add_filter('body_class', 'exp_ca_body_classes');
 
 /**
- * Get suggested products for cross-sells section.
- * Priority: 1) WooCommerce cross-sells  2) Products from same categories  3) Recent products
- *
- * @return WC_Product[] Array of product objects (max 4)
- */
-function exp_ca_get_suggested_products() {
-    $cart = WC()->cart;
-    if (!$cart || $cart->is_empty()) {
-        return [];
-    }
-
-    $cart_product_ids = [];
-    foreach ($cart->get_cart() as $item) {
-        $cart_product_ids[] = $item['product_id'];
-    }
-
-    // 1) Try WooCommerce cross-sells
-    $cross_sell_ids = $cart->get_cross_sells();
-    if (!empty($cross_sell_ids)) {
-        $cross_sell_ids = array_slice($cross_sell_ids, 0, 4);
-        $products = array_filter(array_map('wc_get_product', $cross_sell_ids));
-        if (!empty($products)) {
-            return $products;
-        }
-    }
-
-    // 2) Fallback: products from the same categories (excluding cart items)
-    $category_ids = [];
-    foreach ($cart_product_ids as $pid) {
-        $terms = get_the_terms($pid, 'product_cat');
-        if ($terms && !is_wp_error($terms)) {
-            foreach ($terms as $term) {
-                $category_ids[] = $term->term_id;
-            }
-        }
-    }
-    $category_ids = array_unique($category_ids);
-
-    if (!empty($category_ids)) {
-        $args = [
-            'status'   => 'publish',
-            'limit'    => 4,
-            'exclude'  => $cart_product_ids,
-            'orderby'  => 'rand',
-            'category' => $category_ids,
-        ];
-        $products = wc_get_products($args);
-        if (!empty($products)) {
-            return $products;
-        }
-    }
-
-    // 3) Last fallback: recent products
-    $args = [
-        'status'  => 'publish',
-        'limit'   => 4,
-        'exclude' => $cart_product_ids,
-        'orderby' => 'date',
-        'order'   => 'DESC',
-    ];
-    $products = wc_get_products($args);
-    return $products ?: [];
-}
-
-/**
- * Build the HTML for a single cross-sell product card
- */
-function exp_ca_render_product_card($product) {
-    $link  = esc_url($product->get_permalink());
-    $name  = esc_html($product->get_name());
-    $image_id = $product->get_image_id();
-    $image = $image_id ? wp_get_attachment_image_url($image_id, 'woocommerce_thumbnail') : wc_placeholder_img_src('woocommerce_thumbnail');
-    $price = $product->get_price_html();
-    $badge = $product->is_on_sale() ? '<span class="exp-cross-sell-badge">Promo</span>' : '';
-    $is_simple = $product->is_type('simple') && $product->is_purchasable() && $product->is_in_stock();
-
-    $html  = '<div class="exp-cross-sell-item">';
-    $html .= '<a href="' . $link . '" class="exp-cross-sell-link">';
-    $html .= '<div class="exp-cross-sell-image">';
-    $html .= '<img src="' . esc_url($image) . '" alt="' . $name . '">' . $badge;
-    $html .= '</div>';
-    $html .= '<div class="exp-cross-sell-info">';
-    $html .= '<h3 class="exp-cross-sell-title">' . $name . '</h3>';
-    $html .= '<div class="exp-cross-sell-price">' . $price . '</div>';
-    $html .= '</div></a>';
-    $html .= '<div class="exp-cross-sell-action">';
-    if ($is_simple) {
-        $html .= '<a href="' . esc_url($product->add_to_cart_url()) . '" class="exp-cross-sell-btn ajax_add_to_cart add_to_cart_button" data-product_id="' . esc_attr($product->get_id()) . '" data-quantity="1">Ajouter au panier</a>';
-    } else {
-        $html .= '<a href="' . $link . '" class="exp-cross-sell-btn">Voir le produit</a>';
-    }
-    $html .= '</div></div>';
-    return $html;
-}
-
-/**
- * Inject cross-sells into WooCommerce block-based cart via footer script
- */
-function exp_ca_inject_cross_sells_block_cart() {
-    if (!is_cart()) {
-        return;
-    }
-
-    $products = exp_ca_get_suggested_products();
-    if (empty($products)) {
-        return;
-    }
-
-    $cards_html = '';
-    foreach ($products as $product) {
-        $cards_html .= exp_ca_render_product_card($product);
-    }
-    $cards_json = json_encode($cards_html);
-
-    ?>
-    <script>
-    (function() {
-        function injectCrossSells() {
-            if (document.querySelector('.exp-cross-sells')) return;
-
-            var cartBlock = document.querySelector('.wp-block-woocommerce-cart');
-            if (!cartBlock) return;
-
-            if (cartBlock.classList.contains('is-loading')) {
-                setTimeout(injectCrossSells, 500);
-                return;
-            }
-
-            var filledCart = cartBlock.querySelector('.wp-block-woocommerce-filled-cart-block');
-            if (!filledCart || filledCart.offsetHeight === 0) {
-                setTimeout(injectCrossSells, 500);
-                return;
-            }
-
-            var wrapper = document.createElement('div');
-            wrapper.className = 'exp-cross-sells cross-sells';
-            wrapper.innerHTML = '<h2>Vous seriez peut-\u00eatre int\u00e9ress\u00e9 par...</h2>' +
-                '<div class="exp-cross-sells-grid">' +
-                <?php echo $cards_json; ?> +
-                '</div>';
-
-            cartBlock.parentNode.insertBefore(wrapper, cartBlock.nextSibling);
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(injectCrossSells, 1500);
-            });
-        } else {
-            setTimeout(injectCrossSells, 1500);
-        }
-
-        var observer = new MutationObserver(function(mutations) {
-            for (var i = 0; i < mutations.length; i++) {
-                var target = mutations[i].target;
-                if (target.classList && (
-                    target.classList.contains('wp-block-woocommerce-cart') ||
-                    target.classList.contains('wp-block-woocommerce-filled-cart-block')
-                )) {
-                    if (!document.querySelector('.exp-cross-sells')) {
-                        setTimeout(injectCrossSells, 800);
-                    }
-                }
-            }
-        });
-
-        var initObserver = function() {
-            var cartEl = document.querySelector('.wp-block-woocommerce-cart');
-            if (cartEl) {
-                observer.observe(cartEl, { attributes: true, attributeFilter: ['class'], subtree: true, childList: true });
-            } else {
-                setTimeout(initObserver, 500);
-            }
-        };
-        initObserver();
-    })();
-    </script>
-    <?php
-}
-add_action('wp_footer', 'exp_ca_inject_cross_sells_block_cart', 20);
-
-/**
- * Also hook into traditional WooCommerce cart (non-block) for compatibility
- */
-function exp_ca_display_cross_sells_classic() {
-    if (!is_cart()) {
-        return;
-    }
-
-    $products = exp_ca_get_suggested_products();
-    if (empty($products)) {
-        return;
-    }
-
-    echo '<div class="exp-cross-sells cross-sells">';
-    echo '<h2>Vous seriez peut-&ecirc;tre int&eacute;ress&eacute; par...</h2>';
-    echo '<div class="exp-cross-sells-grid">';
-    foreach ($products as $product) {
-        echo exp_ca_render_product_card($product);
-    }
-    echo '</div></div>';
-}
-add_action('woocommerce_after_cart', 'exp_ca_display_cross_sells_classic', 10);
-
-/**
  * Enable registration on My Account page
  */
 function exp_ca_enable_registration() {
-    // Force enable registration on My Account page
     add_filter('pre_option_woocommerce_enable_myaccount_registration', function() {
         return 'yes';
     });
-    // Auto-generate username from email
     add_filter('pre_option_woocommerce_registration_generate_username', function() {
         return 'yes';
     });
-    // Auto-generate password
     add_filter('pre_option_woocommerce_registration_generate_password', function() {
         return 'yes';
     });
 }
 add_action('init', 'exp_ca_enable_registration');
+
+/**
+ * Custom empty cart display — replaces default WC empty cart block
+ */
+function exp_ca_custom_empty_cart() {
+    if (!is_cart()) {
+        return;
+    }
+
+    $shop_url = get_permalink(wc_get_page_id('shop'));
+    if (!$shop_url) {
+        $shop_url = home_url('/boutique/');
+    }
+    $shop_url_js = esc_url($shop_url);
+
+    ?>
+    <script>
+    (function() {
+        var shopUrl = <?php echo json_encode($shop_url_js); ?>;
+
+        function replaceEmptyCart() {
+            var emptyBlock = document.querySelector('.wp-block-woocommerce-empty-cart-block');
+            if (!emptyBlock) return;
+            if (emptyBlock.offsetHeight === 0) return;
+            if (emptyBlock.classList.contains('exp-empty-cart')) return;
+
+            emptyBlock.innerHTML = '';
+            emptyBlock.className = 'exp-empty-cart';
+
+            emptyBlock.innerHTML =
+                '<div class="exp-empty-cart__inner">' +
+                    '<div class="exp-empty-cart__icon">' +
+                        '<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                            '<circle cx="40" cy="40" r="38" stroke="#E94F1A" stroke-width="2" stroke-dasharray="6 4" opacity="0.3"/>' +
+                            '<path d="M25 28H29.2L34.4 52H50.8L55 34H31.6" stroke="#E94F1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+                            '<circle cx="36" cy="57" r="2.5" fill="#E94F1A"/>' +
+                            '<circle cx="50" cy="57" r="2.5" fill="#E94F1A"/>' +
+                        '</svg>' +
+                    '</div>' +
+                    '<h2 class="exp-empty-cart__title">Votre panier est vide</h2>' +
+                    '<p class="exp-empty-cart__text">Parcourez notre catalogue d\u2019\u00e9chafaudages professionnels et trouvez l\u2019\u00e9quipement adapt\u00e9 \u00e0 votre chantier.</p>' +
+                    '<a href="' + shopUrl + '" class="exp-empty-cart__btn">' +
+                        '<span>Voir nos produits</span>' +
+                        '<span class="exp-empty-cart__btn-icon"><svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.4516 2.66578L12.0326 0.187487C11.9745 0.128079 11.9053 0.0809252 11.8292 0.048746C11.7531 0.016567 11.6715 0 11.589 0C11.5066 0 11.425 0.016567 11.3489 0.048746C11.2728 0.0809252 11.2036 0.128079 11.1455 0.187487C11.0293 0.306427 10.9643 0.466144 10.9643 0.632531C10.9643 0.798918 11.0293 0.958636 11.1455 1.07758L12.9484 2.93837H0.625806C0.46115 2.93837 0.303193 3.00459 0.186708 3.12266C0.0702232 3.24073 0.00483871 3.40083 0.00483871 3.56774C0.00483871 3.73466 0.0702232 3.89476 0.186708 4.01283C0.303193 4.1309 0.46115 4.19712 0.625806 4.19712H12.9484L11.1455 6.05159C11.0293 6.17053 10.9643 6.33025 10.9643 6.49663C10.9643 6.66302 11.0293 6.82274 11.1455 6.94168C11.2036 7.00109 11.2728 7.04824 11.3489 7.08042C11.425 7.1126 11.5066 7.12917 11.589 7.12917C11.6715 7.12917 11.7531 7.1126 11.8292 7.08042C11.9053 7.04824 11.9745 7.00109 12.0326 6.94168L14.4516 4.46338C14.6839 4.22562 14.8145 3.90418 14.8145 3.56958C14.8145 3.23498 14.6839 2.91354 14.4516 2.67578V2.66578Z" fill="currentColor"/></svg></span>' +
+                    '</a>' +
+                    '<div class="exp-empty-cart__contact">' +
+                        '<span class="exp-empty-cart__contact-text">Besoin d\u2019aide\u00a0?</span>' +
+                        '<a href="tel:0383213436" class="exp-empty-cart__phone">03 83 21 34 36</a>' +
+                    '</div>' +
+                '</div>';
+        }
+
+        function watchCart() {
+            var cartBlock = document.querySelector('.wp-block-woocommerce-cart');
+            if (!cartBlock) {
+                setTimeout(watchCart, 500);
+                return;
+            }
+
+            var observer = new MutationObserver(function() {
+                var emptyBlock = document.querySelector('.wp-block-woocommerce-empty-cart-block');
+                if (emptyBlock && emptyBlock.offsetHeight > 0 && !emptyBlock.classList.contains('exp-empty-cart')) {
+                    replaceEmptyCart();
+                }
+            });
+            observer.observe(cartBlock, { childList: true, subtree: true, attributes: true });
+
+            setTimeout(function() {
+                var emptyBlock = document.querySelector('.wp-block-woocommerce-empty-cart-block');
+                if (emptyBlock && emptyBlock.offsetHeight > 0 && !emptyBlock.classList.contains('exp-empty-cart')) {
+                    replaceEmptyCart();
+                }
+            }, 1500);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', watchCart);
+        } else {
+            watchCart();
+        }
+    })();
+    </script>
+    <?php
+}
+add_action('wp_footer', 'exp_ca_custom_empty_cart', 20);
