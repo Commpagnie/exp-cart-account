@@ -2,7 +2,7 @@
 /**
  * Plugin Name: EXP Cart & Account
  * Description: Personnalisation des pages Panier, Checkout et Mon Compte selon le design system Express Échafaudage.
- * Version: 3.3.0
+ * Version: 3.4.0
  * Author: Commpagnie
  * Author URI: https://commpagnie.fr
  * Text Domain: exp-cart-account
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('EXP_CA_VERSION', '3.3.0');
+define('EXP_CA_VERSION', '3.4.0');
 define('EXP_CA_PATH', plugin_dir_path(__FILE__));
 define('EXP_CA_URL', plugin_dir_url(__FILE__));
 
@@ -255,3 +255,22 @@ function exp_ca_display_cross_sells_classic() {
     echo '</div></div>';
 }
 add_action('woocommerce_after_cart', 'exp_ca_display_cross_sells_classic', 10);
+
+/**
+ * Enable registration on My Account page
+ */
+function exp_ca_enable_registration() {
+    // Force enable registration on My Account page
+    add_filter('pre_option_woocommerce_enable_myaccount_registration', function() {
+        return 'yes';
+    });
+    // Auto-generate username from email
+    add_filter('pre_option_woocommerce_registration_generate_username', function() {
+        return 'yes';
+    });
+    // Auto-generate password
+    add_filter('pre_option_woocommerce_registration_generate_password', function() {
+        return 'yes';
+    });
+}
+add_action('init', 'exp_ca_enable_registration');
