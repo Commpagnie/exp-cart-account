@@ -1,6 +1,6 @@
 /* ==========================================================================
    EXP Cart & Account — Design System Express Échafaudage
-   Version: 3.5.0 — Panier vide custom + suppression cross-sells + responsive container queries
+   Version: 3.5.1 — Panier vide custom + suppression cross-sells + responsive container queries
    
    Règle : NE PAS toucher width, flex, display, position, float, padding layout
    On cible uniquement : couleurs, typo, border-radius, backgrounds, boutons
@@ -228,58 +228,6 @@
     background-color: var(--exp-orange) !important;
 }
 
-/* --- Panier vide --- */
-.woocommerce-cart .wc-block-cart__empty-cart__title {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 700 !important;
-    color: var(--exp-bleu) !important;
-    font-size: 24px !important;
-}
-
-/* Icône panier vide */
-.woocommerce-cart .wc-block-cart__empty-cart__title::before {
-    color: var(--exp-gris) !important;
-}
-
-/* Grille produits suggérés (panier vide) */
-.woocommerce-cart .wc-block-grid__product-title {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 600 !important;
-    color: var(--exp-bleu) !important;
-    text-decoration: none !important;
-}
-
-.woocommerce-cart .wc-block-grid__product-title:hover {
-    color: var(--exp-orange) !important;
-}
-
-.woocommerce-cart .wc-block-grid__product-price .wc-block-formatted-money-amount {
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 700 !important;
-    color: var(--exp-orange) !important;
-}
-
-/* Bouton "Ajouter au panier" dans la grille — FIX couleur */
-.woocommerce-cart .wc-block-grid__product .wp-element-button,
-.woocommerce-cart .wc-block-grid__product .add_to_cart_button {
-    background: var(--exp-gradient-orange) !important;
-    color: #FFFFFF !important;
-    border: none !important;
-    border-radius: var(--exp-radius-sm) !important;
-    font-family: var(--exp-font-heading) !important;
-    font-weight: 600 !important;
-    font-size: 13px !important;
-    box-shadow: none;
-    transition: var(--exp-transition);
-}
-
-.woocommerce-cart .wc-block-grid__product .wp-element-button:hover,
-.woocommerce-cart .wc-block-grid__product .add_to_cart_button:hover {
-    box-shadow: none !important;
-    transform: translateY(-1px);
-    color: #FFFFFF !important;
-}
-
 /* Moyens de paiement acceptés */
 .woocommerce-cart .wc-block-components-payment-method-icons {
     opacity: 0.7;
@@ -290,11 +238,8 @@
    4b. EMPTY CART — Panier vide custom
    ========================================================================== */
 
-/* Hide default WC empty cart content */
-.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wp-block-heading,
-.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wp-block-separator,
-.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wp-block-woocommerce-product-new,
-.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wc-block-grid {
+/* Hide entire default WC empty cart block */
+.woocommerce-cart .wp-block-woocommerce-empty-cart-block {
     display: none !important;
 }
 
@@ -794,7 +739,7 @@
 
 /* ==========================================================================
    9. RESPONSIVE — Cart & Checkout mobile
-   Version: 3.5.0
+   Version: 3.5.1
    
    NOTE: WooCommerce blocks utilisent CSS Container Queries (@container)
    pour le layout interne (2 col → 1 col à 699px container width).
@@ -838,8 +783,7 @@
         font-size: 22px !important;
     }
 
-    .woocommerce-cart .wp-block-heading,
-    .woocommerce-cart .wc-block-cart__empty-cart__title {
+    .woocommerce-cart .wp-block-heading {
         font-size: 18px !important;
     }
 
@@ -1032,17 +976,4 @@
 .woocommerce-cart .wp-block-woocommerce-filled-cart-block {
     max-width: 1200px !important;
     margin: 0 auto !important;
-}
-
-/* ---- Panier vide — textes lisibles ---- */
-
-.woocommerce-cart .wc-block-cart__empty-cart__title,
-.woocommerce-cart .wp-block-woocommerce-empty-cart-block p,
-.woocommerce-cart .wp-block-woocommerce-empty-cart-block a {
-    color: var(--exp-texte) !important;
-}
-
-.woocommerce-cart .wc-block-cart__empty-cart__title + .wp-element-button,
-.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wp-element-button {
-    color: #FFFFFF !important;
 }
