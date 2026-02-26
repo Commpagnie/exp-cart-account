@@ -2,7 +2,7 @@
 /**
  * Plugin Name: EXP Cart & Account
  * Description: Personnalisation des pages Panier, Checkout et Mon Compte selon le design system Express Échafaudage.
- * Version: 3.5.1
+ * Version: 3.5.2
  * Author: Commpagnie
  * Author URI: https://commpagnie.fr
  * Text Domain: exp-cart-account
