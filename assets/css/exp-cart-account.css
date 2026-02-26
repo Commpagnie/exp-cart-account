@@ -1,6 +1,6 @@
 /* ==========================================================================
    EXP Cart & Account — Design System Express Échafaudage
-   Version: 3.5.1 — Panier vide custom + suppression cross-sells + responsive container queries
+   Version: 3.5.2 — Panier vide custom + suppression cross-sells + responsive container queries
    
    Règle : NE PAS toucher width, flex, display, position, float, padding layout
    On cible uniquement : couleurs, typo, border-radius, backgrounds, boutons
@@ -739,7 +739,7 @@
 
 /* ==========================================================================
    9. RESPONSIVE — Cart & Checkout mobile
-   Version: 3.5.1
+   Version: 3.5.2
    
    NOTE: WooCommerce blocks utilisent CSS Container Queries (@container)
    pour le layout interne (2 col → 1 col à 699px container width).
@@ -758,15 +758,6 @@
 /* --- Mobile — wrapper Elementor (viewport) --- */
 @media (max-width: 767px) {
 
-    /* Elementor container padding */
-    .woocommerce-cart .elementor-element.e-con,
-    .woocommerce-cart .e-con-inner {
-        --padding-left: 12px !important;
-        --padding-right: 12px !important;
-        padding-left: 12px !important;
-        padding-right: 12px !important;
-    }
-
     /* WC cart wrapper */
     .woocommerce-cart .wp-block-woocommerce-cart {
         padding-left: 0 !important;
@@ -778,8 +769,7 @@
     }
 
     /* Titre page */
-    .woocommerce-cart h1.entry-title,
-    .woocommerce-cart .elementor-heading-title {
+    .woocommerce-cart h1.entry-title {
         font-size: 22px !important;
     }
 
@@ -866,17 +856,6 @@
     /* Moyens de paiement */
     .wc-block-cart .wc-block-components-payment-method-icons {
         justify-content: center !important;
-    }
-}
-
-/* --- Petit mobile (viewport) --- */
-@media (max-width: 480px) {
-    .woocommerce-cart .elementor-element.e-con,
-    .woocommerce-cart .e-con-inner {
-        --padding-left: 8px !important;
-        --padding-right: 8px !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
     }
 }
 

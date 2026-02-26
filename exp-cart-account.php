@@ -13,7 +13,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-define('EXP_CA_VERSION', '3.5.1');
+define('EXP_CA_VERSION', '3.5.2');
 define('EXP_CA_PATH', plugin_dir_path(__FILE__));
 define('EXP_CA_URL', plugin_dir_url(__FILE__));
 
